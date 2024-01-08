@@ -36,7 +36,7 @@ class Blockchain {
     const previousHash = this.chain[index - 1].hash;
     const timestamp = new Date().toISOString();
     const newBlock = new Block(index, timestamp, data, previousHash);
-    this.chain.push({ data: newBlock });
+    this.chain.push(newBlock);
   }
 
   printBlockchain() {
@@ -45,7 +45,7 @@ class Blockchain {
       console.log(`Index: ${block.index}`);
       console.log(`Timestamp: ${block.timestamp}`);
       console.log(`Data: ${block.data}`);
-      console.log(`Previous Hash: ${block.previousHash}`);
+      console.log(`Previous Hash: ${block.previous_hash}`);
       console.log(`Hash: ${block.hash}\n`);
     });
   }
