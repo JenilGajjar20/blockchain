@@ -86,6 +86,30 @@ class Blockchain {
     this.chain.push(newBlock);
   }
 
+  validateHash() {
+    for (let i = 1; i < this.chain.length; i++) {
+      const currentBlock = this.chain[i];
+      const previousBlock = this.chain[i - 1];
+      console.log("previous_hash: ", previousBlock.hash);
+      console.log("currentBlock - previous_hash: ", currentBlock.previous_hash);
+
+      // Check if the current block's hash is valid
+      if (currentBlock.hash !== currentBlock.computeHash()) {
+        console.log(`Hash mismatch in Block ${currentBlock.index}`);
+        return false;
+      }
+
+      // Check if the previous hash matches with the hash of the previous block
+      if (currentBlock.previous_hash !== previousBlock.hash) {
+        console.log(`Invalid previous hash in Block ${currentBlock.index}`);
+        return false;
+      }
+
+      console.log("All hashes and previous hashes are valid!");
+      return true;
+    }
+  }
+
   printBlockchain() {
     // Printing the information about each block in the blockchain
     this.chain.forEach((block) => {
@@ -120,6 +144,7 @@ r1.question("Enter the number of blocks in the blockchain: ", (numBlocks) => {
       r1.close();
       console.log("\nBlockchain: \n");
       blockchain.printBlockchain();
+      blockchain.validateHash();
     }
   };
 
