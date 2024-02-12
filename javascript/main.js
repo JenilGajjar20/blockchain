@@ -90,8 +90,6 @@ class Blockchain {
     for (let i = 1; i < this.chain.length; i++) {
       const currentBlock = this.chain[i];
       const previousBlock = this.chain[i - 1];
-      console.log("previous_hash: ", previousBlock.hash);
-      console.log("currentBlock - previous_hash: ", currentBlock.previous_hash);
 
       // Check if the current block's hash is valid
       if (currentBlock.hash !== currentBlock.computeHash()) {
